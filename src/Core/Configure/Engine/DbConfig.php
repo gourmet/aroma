@@ -44,8 +44,7 @@ class DbConfig implements ConfigEngineInterface
 
         if (!($table instanceof ConfigurationsTableInterface)) {
             throw new InvalidArgumentException(__(
-                'Custom table should implement the `{0}`.',
-                [ConfigrationsTableInterface::class]
+                'Custom table should implement the `Gourmet\Aroma\Model\Table\ConfigurationsTableInterface`.'
             ));
         }
 
