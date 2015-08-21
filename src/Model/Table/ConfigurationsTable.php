@@ -5,14 +5,22 @@ use Cake\Validation\Validator;
 
 class ConfigurationsTable extends AbstractConfigurationsTable
 {
+    /**
+     * {@inheritdoc}
+     */
     public function initialize(array $config)
     {
         $this->table('aroma_configurations');
         $this->displayField('value');
-        $this->primaryKey('id');
         $this->addBehavior('Timestamp');
     }
 
+    /**
+     * Default validation rules.
+     *
+     * @param \Cake\Validation\Validator $validator
+     * @return \Cake\Validation\Validator
+     */
     public function validationDefault(Validator $validator)
     {
         $validator->requirePresence('namespace', 'create')
