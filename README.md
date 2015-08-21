@@ -1,6 +1,7 @@
 # Aroma
 
 [![Build Status](https://travis-ci.org/gourmet/aroma.svg?branch=master)](https://travis-ci.org/gourmet/aroma)
+[![Coverage](https://img.shields.io/coveralls/gourmet/aroma/master.svg?style=flat-square)](https://coveralls.io/r/gourmet/aroma)
 [![Total Downloads](https://poser.pugx.org/gourmet/aroma/downloads.svg)](https://packagist.org/packages/gourmet/aroma)
 [![License](https://poser.pugx.org/gourmet/aroma/license.svg)](https://packagist.org/packages/gourmet/aroma)
 
