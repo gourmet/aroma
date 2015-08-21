@@ -7,8 +7,10 @@ class ConfigurationsTable extends AbstractConfigurationsTable
 {
     /**
      * {@inheritdoc}
+     *
+     * @param array $config List of options for this table
      */
-    public function initialize(array $config)
+    public function initialize(array $config = [])
     {
         $this->table('aroma_configurations');
         $this->displayField('value');

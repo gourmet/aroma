@@ -9,6 +9,10 @@ abstract class AbstractConfigurationsTable extends Table implements Configuratio
 
     /**
      * {@inheritdoc}
+     *
+     * @param \Cake\ORM\Query $query Query.
+     * @param array $options Options.
+     * @return \Cake\ORM\Query
      */
     public function findKv(Query $query, array $options)
     {

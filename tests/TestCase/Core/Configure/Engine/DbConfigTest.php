@@ -28,7 +28,7 @@ class DbConfigTest extends TestCase
         array_walk($keys, ['Cake\Core\Configure', 'delete']);
     }
 
-    public function _config()
+    protected function _config()
     {
         return [
             'Foo' => [
