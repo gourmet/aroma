@@ -9,6 +9,7 @@ class ConfigurationsTable extends AbstractConfigurationsTable
      * {@inheritdoc}
      *
      * @param array $config List of options for this table
+     * @return void
      */
     public function initialize(array $config = [])
     {
