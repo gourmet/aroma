@@ -18,7 +18,7 @@ class ConfigurationsTable extends AbstractConfigurationsTable
     /**
      * Default validation rules.
      *
-     * @param \Cake\Validation\Validator $validator
+     * @param \Cake\Validation\Validator $validator Validator.
      * @return \Cake\Validation\Validator
      */
     public function validationDefault(Validator $validator)

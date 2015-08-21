@@ -29,8 +29,8 @@ class DbConfig implements ConfigEngineInterface
     /**
      * Constructor to inject the table and define the cache configuration to use.
      *
-     * @param \Gourmet\Aroma\Model\Table\ConfigurationsTableInterface|null $table
-     * @param string $cacheConfig
+     * @param \Gourmet\Aroma\Model\Table\ConfigurationsTableInterface|string|null $table Table alias or instance.
+     * @param string $cacheConfig Cache config alias.
      */
     public function __construct($table = null, $cacheConfig = 'default')
     {
@@ -82,9 +82,9 @@ class DbConfig implements ConfigEngineInterface
     /**
      * Persists a configuration namespaced key/value to the database.
      *
-     * @param mixed $value
-     * @param string $path
-     * @param string $namespace
+     * @param mixed $value Value.
+     * @param string $path Key path.
+     * @param string $namespace Namespace.
      * @return bool
      */
     protected function _persist($value, $path, $namespace)
