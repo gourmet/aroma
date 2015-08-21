@@ -5,6 +5,7 @@ use Cake\Core\Configure\ConfigEngineInterface;
 use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 use Cake\Utility\Hash;
+use Gourmet\Aroma\Model\Table\ConfigurationsTableInterface;
 use InvalidArgumentException;
 
 class DbConfig implements ConfigEngineInterface
@@ -24,8 +25,11 @@ class DbConfig implements ConfigEngineInterface
             $table = TableRegistry::get($table);
         }
 
-        if (!($table instanceof Table)) {
-            throw new InvalidArgumentException("Expecting '\Cake\ORM\Table'");
+        if (!($table instanceof ConfigurationsTableInterface)) {
+            throw new InvalidArgumentException(__(
+                'Custom table should implement the `{0}`.',
+                [ConfigrationsTableInterface::class]
+            ));
         }
 
         $this->_cacheConfig = $cacheConfig;

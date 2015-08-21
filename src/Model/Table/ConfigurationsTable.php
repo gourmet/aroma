@@ -1,12 +1,9 @@
 <?php
 namespace Gourmet\Aroma\Model\Table;
 
-use Cake\Collection\Collection;
-use Cake\ORM\Query;
-use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-class ConfigurationsTable extends Table
+class ConfigurationsTable extends AbstractConfigurationsTable
 {
     public function initialize(array $config)
     {
@@ -27,21 +24,5 @@ class ConfigurationsTable extends Table
             ->requirePresence('value');
 
         return $validator;
-    }
-
-    public function findKv(Query $query, array $options)
-    {
-        return $query
-            ->find('list', [
-                'keyField' => 'path',
-                'valueField' => 'value',
-                'groupField' => 'namespace',
-            ])
-            ->formatResults(function ($results) {
-                $resultset = $results->toArray();
-                $resultset += $resultset[''];
-                unset($resultset['']);
-                return $resultset;
-            });
     }
 }
