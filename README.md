@@ -34,7 +34,7 @@ For the most basic setup, you don't need to do much:
 ```php
 // config/bootstrap.php
 use Cake\Core\Configure;
-use Gourmet\Core\Configure\Engine\DbConfig;
+use Gourmet\Aroma\Core\Configure\Engine\DbConfig;
 
 Configure::config('db', new DbConfig());
 ```
@@ -45,7 +45,7 @@ If you'd like to use a custom table for storing configuration:
 // config/bootstrap.php
 use Cake\Core\Configure;
 use Cake\ORM\TableRegistry;
-use Gourmet\Core\Configure\Engine\DbConfig;
+use Gourmet\Aroma\Core\Configure\Engine\DbConfig;
 
 Configure::config('db', new DbConfig(TableRegistry::get('MyConfigurations')));
 ```
@@ -55,7 +55,7 @@ Of if you just want to use a different caching engine configuration for storing 
 ```php
 // config/bootstrap.php
 use Cake\Core\Configure;
-use Gourmet\Core\Configure\Engine\DbConfig;
+use Gourmet\Aroma\Core\Configure\Engine\DbConfig;
 
 Configure::config('db', new DbConfig(null, 'customCacheConfigAlias'));
 ```
