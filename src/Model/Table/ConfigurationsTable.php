@@ -27,7 +27,7 @@ class ConfigurationsTable extends AbstractConfigurationsTable
     public function validationDefault(Validator $validator)
     {
         $validator->requirePresence('namespace', 'create')
-            ->add('namespace', 'valid-namespace', ['rule' => '@[a-z0-9\\\.]+@'])
+            ->add('namespace', 'valid-namespace', ['rule' => ['custom', '@[a-z0-9\\\.]+@']])
 
             ->requirePresence('path')
             ->notEmpty('path')
