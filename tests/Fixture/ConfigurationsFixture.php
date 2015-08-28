@@ -20,7 +20,6 @@ class ConfigurationsFixture extends TestFixture
 
     public $records = [
         [
-            'id' => 1,
             'namespace' => null,
             'path' => 'some',
             'value' => 'thing',
@@ -28,7 +27,6 @@ class ConfigurationsFixture extends TestFixture
             'modified' => '2015-03-26 14:16:00',
         ],
         [
-            'id' => 2,
             'namespace' => 'Aroma',
             'path' => 'some',
             'value' => 'thing',

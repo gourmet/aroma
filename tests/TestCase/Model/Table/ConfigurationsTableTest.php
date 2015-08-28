@@ -34,4 +34,15 @@ class ConfigurationsTableTest extends TestCase
         ];
         $this->assertEquals($expected, $result);
     }
+
+    public function testValidationDefault()
+    {
+        $entity = $this->Configurations->newEntity([
+            'namespace' => 'some thing',
+            'path' => 'some',
+            'value' => 'thing',
+        ]);
+        $this->Configurations->save($entity);
+        $this->assertEquals($entity->errors(), []);
+    }
 }
