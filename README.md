@@ -12,7 +12,7 @@ DB-based configuration for [CakePHP 3][cakephp].
 Using [Composer][composer]:
 
 ```
-composer require gourmet/aroma:~1.0
+composer require gourmet/aroma:^1.0.x-dev
 ```
 
 You then need to load the plugin. You can use the shell command:
