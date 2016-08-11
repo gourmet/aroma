@@ -25,7 +25,7 @@ abstract class AbstractConfigurationsTable extends Table implements Configuratio
             ->formatResults(function ($results) {
                 $resultSet = $results->toArray();
                 if (isset($resultSet[''])) {
-                    $resultSet = array_merge($resultSet, $resultSet['']);
+                    $resultSet += $resultSet[''];
                     unset($resultSet['']);
                 }
                 return $resultSet;
