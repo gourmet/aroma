@@ -24,8 +24,10 @@ abstract class AbstractConfigurationsTable extends Table implements Configuratio
             ])
             ->formatResults(function ($results) {
                 $resultSet = $results->toArray();
-                $resultSet += $resultSet[''];
-                unset($resultSet['']);
+                if (isset($resultSet[''])) {
+                    $resultSet = array_merge($resultSet, $resultSet['']);
+                    unset($resultSet['']);
+                }
                 return $resultSet;
             });
     }
