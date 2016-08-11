@@ -62,11 +62,15 @@ class DbConfig implements ConfigEngineInterface
      */
     public function read($key)
     {
-        return $this->_table
-            ->find('kv')
-            ->where([
-                $this->_table->aliasField('namespace') => $key
-            ])
+        $query = $this->_table->find('kv');
+
+        if ($key !== '*') {
+            $query->where([
+                $this->_table->aliasField('namespace') . ' IS' => $key
+            ]);
+        }
+
+        return $query
             ->cache(function ($q) {
                 return md5(serialize($q->clause('where')));
             }, $this->_cacheConfig)
