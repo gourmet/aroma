@@ -68,8 +68,8 @@ class DbConfig implements ConfigEngineInterface
                 $this->_table->aliasField('namespace') => $key
             ])
             ->cache(function ($q) {
-                return md5(serialize($q->clause('where')), $this->_cacheConfig);
-            })
+                return md5(serialize($q->clause('where')));
+            }, $this->_cacheConfig)
             ->toArray();
     }
 
