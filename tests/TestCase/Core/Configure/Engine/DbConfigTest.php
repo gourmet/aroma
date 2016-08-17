@@ -28,13 +28,24 @@ class DbConfigTest extends TestCase
         array_walk($keys, ['Cake\Core\Configure', 'delete']);
     }
 
-    protected function _config()
+    protected function _config($namespace = '*')
     {
-        return [
-            'Foo' => [
-                'bar' => 'foobar',
-            ],
-        ];
+        switch ($namespace) {
+            case 'Editable':
+                return [
+                    'Foo' => [
+                        'bar' => 'foobar',
+                    ],
+                ];
+                break;
+            case null:
+                return ['foz' => 'baz'];
+                break;
+
+            case '*':
+                return $this->_config('Editable') + $this->_config(null);
+                break;
+        }
     }
 
     /**
@@ -47,13 +58,13 @@ class DbConfigTest extends TestCase
 
     public function testRead()
     {
-        $config = $this->_config();
+        $config = $this->_config('Editable');
 
         $query = $this->getMock('Cake\ORM\Query', [], [$this->tableMock->connection(), $this->tableMock]);
 
         $query->expects($this->once())
             ->method('where')
-            ->with(['Configurations.namespace' => 'Editable'])
+            ->with(['Configurations.namespace IS' => 'Editable'])
             ->will($this->returnValue($query));
 
         $query->expects($this->once())
@@ -71,8 +82,69 @@ class DbConfigTest extends TestCase
 
         Configure::load('Editable', 'db');
 
+        $this->assertEmpty(Configure::read('foz'));
         $this->assertEquals(Configure::read('Foo.bar'), 'foobar');
         $this->assertEquals(Configure::read('Foo'), $config['Foo']);
+    }
+
+    public function testReadWildcard()
+    {
+        $config = $this->_config('*');
+
+        $query = $this->getMock('Cake\ORM\Query', [], [$this->tableMock->connection(), $this->tableMock]);
+
+        $query->expects($this->never())
+            ->method('where');
+
+        $query->expects($this->once())
+            ->method('cache')
+            ->will($this->returnValue($query));
+
+        $query->expects($this->once())
+            ->method('toArray')
+            ->will($this->returnValue($config));
+
+        $this->tableMock->expects($this->once())
+            ->method('find')
+            ->with('kv')
+            ->will($this->returnValue($query));
+
+        Configure::load('*', 'db');
+
+        $this->assertEquals(Configure::read('foz'), 'baz');
+        $this->assertEquals(Configure::read('Foo.bar'), 'foobar');
+        $this->assertEquals(Configure::read('Foo'), $config['Foo']);
+    }
+
+    public function testReadNull()
+    {
+        $config = $this->_config(null);
+
+        $query = $this->getMock('Cake\ORM\Query', [], [$this->tableMock->connection(), $this->tableMock]);
+
+        $query->expects($this->once())
+            ->method('where')
+            ->with(['Configurations.namespace IS' => null])
+            ->will($this->returnValue($query));
+
+        $query->expects($this->once())
+            ->method('cache')
+            ->will($this->returnValue($query));
+
+        $query->expects($this->once())
+            ->method('toArray')
+            ->will($this->returnValue($config));
+
+        $this->tableMock->expects($this->once())
+            ->method('find')
+            ->with('kv')
+            ->will($this->returnValue($query));
+
+        Configure::load(null, 'db');
+
+        $this->assertEquals(Configure::read('foz'), 'baz');
+        $this->assertEmpty(Configure::read('Foo.bar'));
+        $this->assertEmpty(Configure::read('Foo'));
     }
 
     public function testDump()
