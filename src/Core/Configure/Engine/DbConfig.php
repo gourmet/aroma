@@ -89,6 +89,7 @@ class DbConfig implements ConfigEngineInterface
         $data = Hash::flatten($data);
         array_walk($data, [$this, '_persist'], $key);
         array_filter($data);
+
         return (bool)$data;
     }
 
