@@ -37,14 +37,10 @@ class DbConfigTest extends TestCase
                         'bar' => 'foobar',
                     ],
                 ];
-                break;
             case null:
                 return ['foz' => 'baz'];
-                break;
-
             case '*':
                 return $this->_config('Editable') + $this->_config(null);
-                break;
         }
     }
 

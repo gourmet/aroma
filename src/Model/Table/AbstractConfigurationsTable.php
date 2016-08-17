@@ -26,6 +26,7 @@ abstract class AbstractConfigurationsTable extends Table implements Configuratio
                 $resultSet = $results->toArray();
                 $resultSet += $resultSet[''];
                 unset($resultSet['']);
+
                 return $resultSet;
             });
     }
